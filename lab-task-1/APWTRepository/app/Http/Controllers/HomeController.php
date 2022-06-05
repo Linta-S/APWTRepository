@@ -24,8 +24,11 @@ class HomeController extends Controller
     {
         return view('pages.ourTeams');
     }
+
     public function product()
-    {
-        return view('pages.product');
+    {  
+        $pro=['chips','pickle','drinks','water','Milk','Sugar','Ice cream'];
+        //return view('pages.product');
+        return view('pages.product')->with('p', $pro);
     }
 }
