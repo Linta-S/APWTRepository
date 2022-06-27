@@ -19,3 +19,10 @@ Route::post('/login',[HomeController::class, 'loginSubmitted'])->name('login');
 Route::get('/reg',[HomeController::class,'registration'])->name('reg');
 Route::post('/reg',[HomeController::class,'regSubmitted'])->name('reg');
 Route::get('/dash',[HomeController::class,'dashboard'])->name('dash');
+
+ 
+Route::get('/Edit/{id}',[HomeController::class,'Edit']);
+Route::post('/Edit',[HomeController::class,'EditSubmitted'])->name('Edit');
+
+Route::get('/Delete/{id}',[HomeController::class, 'Delete'])->name('Delete');
+
