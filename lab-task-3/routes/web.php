@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+ 
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/login',[HomeController::class,'loginn'])->name('login');
+Route::post('/login',[HomeController::class, 'loginSubmitted'])->name('login');
+Route::get('/reg',[HomeController::class,'registration'])->name('reg');
+Route::post('/reg',[HomeController::class,'regSubmitted'])->name('reg');
+Route::get('/dash',[HomeController::class,'dashboard'])->name('dash');
