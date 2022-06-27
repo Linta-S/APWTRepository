@@ -45,7 +45,7 @@ class HomeController extends Controller
         ['phone.required'=>"Please put you name here"]
        
     );
-        return $request;
+    return "<h1>name: $request->name and Email $request->email nd phone no. $request->phone</h1>";
     }
 
     public function contactus()
