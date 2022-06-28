@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Systemuser;
 use Illuminate\Support\Facades\Validator;
+use Crypt;
+use Session;
+ 
 
 class HomeController extends Controller
 {
@@ -14,9 +17,10 @@ class HomeController extends Controller
     }
 
     public function loginSubmitted(Request $request){
+
         $validate = $request->validate([
             "name"=>"required|min:5|max:20",
-            'password' => 'string|confirmed|min:8',
+            'password' => 'string |min:8',
            /* 'dob'=>'required',
             'email'=>'email',
             'phone'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/'*/
@@ -25,6 +29,22 @@ class HomeController extends Controller
         ['password.required'=>"Please put you password here"]
     );
         return $request;
+
+        $st = Systemuser::where('Name',$request->Phone)
+        ->first();
+
+// return $teacher;
+        if($st){
+        $request->session()->put('user',$st->Name);
+        return redirect()->route('dash');
+       }
+      return back();
+    }
+
+     
+    public function logout(){
+        session()->forget('user');
+        return redirect()->route('login');
     }
     
     public function registration()
@@ -50,13 +70,17 @@ class HomeController extends Controller
 
     $st = new Systemuser();                 //model
     $st->name =$request->name;
-    $st->password =$request->password;
+   $encrypted_password =crypt::encrypt($request ['password']);
+   $st->password =$encrypted_password;
+    //$st->password =$request->password;
     $st->dob =$request->dob;
     $st->email =$request->email;
     $st->phone =$request->phone;
     $st->save();
-     return "<h1>name: $request->name and $request->email</h1>";
-   // return redirect()->route('dash');
+
+    $request->session()->flash('register_status','okk');
+    // return "<h1>name: $request->name and $request->email</h1>";
+    return redirect()->route('dash');
     }
 
 
