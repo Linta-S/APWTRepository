@@ -20,6 +20,7 @@
         
         
         <td><a href="/Details/{{$stt->id}}" class="btn btn-outline-info" role="button" aria-pressed="true">Details</a></td>
+        <td><a href="/Details/{{$stt->id}}" class="btn btn-outline-info" role="button" aria-pressed="true">Details</a></td>
         <td><a href="/Edit/{{$stt->id}}" class="btn btn-outline-success" role="button" aria-pressed="true">Edit</a></td>
         <td><a href="/Delete/{{$stt->id}}" class="btn btn-outline-danger" role="button" aria-pressed="true">Delete</a></td>
     </tr>
