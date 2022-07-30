@@ -13,14 +13,14 @@ class HomeController extends Controller
 {
     public function loginn()
     {
-        return view('pages.logIn');
+        return view('pages.login');
     }
 
     public function loginSubmitted(Request $request){
 
         $validate = $request->validate([
             "name"=>"required|min:5|max:20",
-            'password' => 'string |min:8',
+            'password' => 'string ',
            /* 'dob'=>'required',
             'email'=>'email',
             'phone'=>'required|regex:/^([0-9\s\-\+\(\)]*)$/'*/
@@ -28,17 +28,35 @@ class HomeController extends Controller
         ['name.required'=>"Please put you name here"],
         ['password.required'=>"Please put you password here"]
     );
-        return $request;
+        // return $request;
 
-        $st = Systemuser::where('Name',$request->Phone)
-        ->first();
+         /*$st = Systemuser::where(['Name', '=', $request->Name],
+        ['password', '=', $request->Password]
+     )->first();*/
+    $check = Systemuser::where([
+        ['Email', '=', $request->Email],
+        ['Password', '=', $request->Password]
+    ])->first();
 
 // return $teacher;
-        if($st){
-        $request->session()->put('user',$st->Name);
-        return redirect()->route('dash');
-       }
-      return back();
+/*$request=session()->put('id',$check->id);
+$request=session()->put('name',$check->Name);
+$request=session()->put('email',$check->Email);
+$request=session()->put('phone',$check->Phone);
+return redirect()->route('dash');*/
+if ($check) {
+    session([
+        'id' => $check->id,
+        'Name' => $check->Name,
+        'DOB' => $check->DOB,
+        'Email' => $check->Email,
+       
+        'Phone' => $check->Phone,
+        
+    ]);
+    return redirect()->route(' Dash');
+}
+
     }
 
      

@@ -33,6 +33,6 @@
     </div>
     <input type="checkbox" name="remember"> Remember Me<br>
     <br>
-    <input type="submit" class="btn btn-success" value="Add" >                  
+    <input type="submit" class="btn btn-success" value="Login" >                  
 </form>
 @endsection
